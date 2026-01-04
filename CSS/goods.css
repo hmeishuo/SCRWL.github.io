@@ -1,0 +1,757 @@
+/* --- 基礎設定 --- */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body{
+    height: 100%;
+    background-color: #F2EFE6;
+    color: #333;
+    font-family: 微軟正黑體, "Noto Sans TC", sans-serif;
+}
+
+/* 統一超連結轉場效果 */
+
+a 
+{
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+
+/* --- 全域 Hover 變橘色 --- */
+
+a:hover, .header-right-icons i:hover, .social-box i:hover 
+{
+    color: #D36A28 ;
+}
+
+/* --- 回到頂部按鈕：去背與背景融合 --- */
+.top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    
+    /* 核心修改：移除背景顏色，改為透明 */
+    background: transparent; 
+    border: none;
+    
+    /* 設定按鈕大小 */
+    width: clamp(50px, 6vw, 80px); 
+    cursor: pointer;
+    
+    /* 讓按鈕在滾動時有一點浮動感 (可選) */
+    transition: transform 0.3s ease;
+}
+
+.top:hover {
+    transform: translateY(-10px); /* 滑鼠移上去會往上飄一點 */
+}
+
+.top a img {
+    width: 100%;
+    height: auto;
+    
+    /* 確保圖片本身沒有白底 */
+    display: block; 
+   
+}
+
+/* --- 聊聊 ---*/
+/* --- 左下角聊聊與彈出文字 --- */
+.chat-btn-fixed {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 1000;
+    width: 65px;
+    height: 65px;
+    background: transparent !important;
+}
+
+/* 提示文字樣式 */
+.chat-tooltip {
+    position: absolute;
+    left: 75px;        /* 放在按鈕的右側 */
+    top: 50%;          /* 垂直置中 */
+    transform: translateY(-50%);
+    
+    background-color: #fff;
+    color: #333;
+    padding: 8px 15px;
+    border: 2px solid #333; /* 街頭黑框感 */
+    border-radius: 5px;
+    font-weight: bold;
+    white-space: nowrap;    /* 強制文字不換行 */
+    
+    /* 平常隱藏且透明 */
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    
+    /* 裝飾性的小箭頭 */
+    pointer-events: none; 
+}
+
+/* 小箭頭 (指向左邊按鈕) */
+.chat-tooltip::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #333 transparent transparent;
+}
+
+/* --- 滑鼠碰到後的效果 --- */
+.chat-btn-fixed:hover .chat-tooltip {
+    visibility: visible;
+    opacity: 1;
+    left: 85px; /* 稍微往右彈出的動態感 */
+}
+
+.chat-btn-fixed:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* 圖片樣式維持去背 */
+.chat-btn-fixed img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+/* 手機版適應：手機通常沒有 Hover，建議直接隱藏提示或縮小 */
+@media (max-width: 768px) {
+    .chat-tooltip { display: none; }
+    .chat-btn-fixed { bottom: 20px; left: 20px; width: 50px; height: 50px; }
+}
+
+/* --- Footer 至底佈局 --- */
+
+.site-wrapper 
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.content-container {
+    flex: 1 0 auto;
+    width: 100%;
+    margin: 0 auto;
+    
+}
+
+
+/* --- Header 部分 --- */
+
+.top-orange-bar {
+    background-color: #D36A28;
+    color: white;
+    text-align: center;
+    
+    /* 核心修正：強制 100% 寬度並黏在最上方 */
+    width: 100%;
+    position: fixed; /* 黏在螢幕最上方，滾動時也不會消失 */
+    top: 0;
+    left: 0;
+    z-index: 1000;   /* 確保它在所有元件的最上層 */
+    
+    padding: 10px 0; 
+    font-size: clamp(12px, 1.2vw, 16px);
+    letter-spacing: 0.2vw; 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 35px;
+}
+
+body {
+    /* 關鍵：給 body 一個上邊距，數值需大於橘色條的高度 */
+    padding-top: 30px; 
+}
+
+
+.info-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.info-text {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    white-space: nowrap;
+}
+
+.info-text.active {
+    opacity: 1;
+}
+
+.header-main-row 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 0;
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+.header-left, .header-right-icons, .logo-box { flex: 1; }
+
+.logo-box 
+{
+    display: flex;
+    align-items: center; /* 改為置中對齊，讓字與圖齊平 */
+    justify-content: center;
+    gap: 30px;
+}
+
+
+/* Logo 圖片與字體比例優化 */
+
+.big-logo-img 
+{
+    height: 100px; /* 稍微縮小一點圖片 */
+    width: auto;
+    mix-blend-mode: multiply;
+}
+
+
+.big-brand-name 
+{
+    font-size: 40px; /* 字體大小設為與圖片高度一致 (65px) */
+    font-weight: 900;
+    letter-spacing: 5px;
+    line-height: 1;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.header-right-icons 
+{
+    display: flex;
+    justify-content: flex-end;
+    gap: 50px;
+    font-size: 24px;
+}
+
+/* 導覽列間距加開 */
+
+.nav-bar 
+{
+    padding: 0px 0 40px 0;
+    
+}
+
+.nav-bar ul 
+{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: clamp(30px, 8vw, 150px);
+    padding-bottom: 20px;
+}
+
+.nav-bar ul li a 
+{
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+}
+
+/* --- Footer 全域不跑版設定 --- */
+.main-footer {
+    width: 100%;
+    background-color: transparent; /* 或是你的背景色 */
+    border-top: 2px solid #333; /* 頂部加一條黑線增加層次感 */
+    padding-top: 50px;
+    margin-top: 100px; /* 與上方內容拉開距離 */
+}
+
+.footer-inner {
+    /* 核心：與你的 header/main 一樣維持 80% */
+    width: 80% !important;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    display: flex;
+     /* 平均分配三個區塊 */
+    align-items: flex-start;
+    gap: 40px; /* 區塊之間的最小間距 */
+}
+
+.footer-col {
+    flex: 1; /* 讓三個區塊等寬 */
+    min-width: 200px; /* 防止區塊縮得太小 */
+}
+
+/* 標題樣式 */
+.footer-col h3 {
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #333;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* 列表樣式：解決文字擠壓 */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    white-space: nowrap; /* 關鍵：防止單行文字因寬度不足而斷行 */
+}
+
+.footer-col a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: #D36A28; /* 滑過時變橘色 */
+}
+
+/* 社交圖示 */
+.social-box {
+    display: flex;
+    gap: 15px;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+/* 版權宣告行 */
+.copyright-line {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 50px;
+    border-top: 1px solid #ddd;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.main-img-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 左右切換按鈕 */
+.prev,.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);/*垂直置中*/ 
+    background: rgba(0,0,0,0.3);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.6s ease;
+    border-radius: 50%;
+}
+.prev:hover,.next:hover { background: rgba(0,0,0,0.6); }
+.prev{left: 10px;}
+.next{right: 10px;}
+/*照片動畫*/
+.main-img-wrapper{
+    animation: fade;
+    animation-duration: 1.5s;
+}
+
+@keyframes fade{
+    from {opacity: 0.4;}
+    to{opacity: 1;}
+}
+
+/* 縮圖列表 */
+.thumb-list {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+.thumb {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    background:#fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+.thumb.active, .thumb:hover {
+    border-color: #D36A28; 
+    opacity: 1;
+}
+
+/* 確保大圖高度固定，切換時才不會跳動 */
+#mainImg {
+    width: 400px;
+    height: 400px;
+    object-fit: contain; /* 保持比例 */
+    background: white;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+.product-container {
+    display: flex; /* 左右並排 */
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    gap: 40px; /* 增加圖片與文字間距 */
+    font-family: "Microsoft JhengHei", sans-serif;
+}
+.product-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 圖片與縮圖置中 */
+    width: 450px; 
+    flex-shrink: 0;
+}
+.product-image img {
+    width: 400px;
+}
+
+.product-info {
+    padding-left: 40px;
+    flex: 1; /* 讓資訊區自動填滿剩餘空間 */
+    display: flex;
+    flex-direction: column;
+}
+
+.actions{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #f4f1e6;
+    padding: 20px;
+}
+
+button {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    background: transparent;
+    border: 1px solid #000;
+    height: 45px;
+    transition: 0.2s;
+}
+
+/*數量加減*/
+.quantity-selector {
+    display: flex;
+    width: fit-content;
+    border: 1.5px solid #000;
+}
+.quantity-selector button {
+    width: 60px;
+    border: none;
+    font-size: 20px;
+}
+.quantity-selector input {
+    width: 100px;
+    border-top: none;
+    border-bottom: none;
+    border-left: 1.5px solid #000;
+    border-right: 1.5px solid #000;
+    text-align: center;
+    font-size: 20px;
+    background: transparent;
+    outline: none;
+    padding-left: 10px;
+}
+
+/*按鈕們*/
+.buy-group {
+    display: flex;
+    width: 300px;
+}
+.buy-group button {
+    flex: 1;
+}
+.btn-buy {
+    border-left: none;
+}
+
+/*六角形按鈕*/
+.btn-wishlist {
+    --border-width: 2px; /* 控制框線粗細 */
+    width: 180px;
+    height: 45px;
+    background-color: #000; /* 框線顏色 */
+    border: none;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    /* 外層裁切 */
+    clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+}
+
+.btn-wishlist::before {
+    content: "加入喜愛";
+    position: absolute;
+    /* 透過 calc 讓內層背景縮小，露出外面的黑色背景當邊框 */
+    top: var(--border-width);
+    left: var(--border-width);
+    width: calc(100% - (var(--border-width) * 2));
+    height: calc(100% - (var(--border-width) * 2));
+    background-color: #f4f1e6; /* 按鈕內的顏色 */
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    /* 內層也要切一樣的形狀 */
+    clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+    z-index: 1;
+}
+
+#pDesc {
+    white-space: pre-wrap; /* 讓 \n 可以正常換行，文字過長會自動換行 */
+    line-height: 1.6;
+    color: #444;
+}
+
+/*相關產品*/
+.related-products{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 80px;
+    width: 100%;
+    padding: 0 5%;
+}
+.section-title{
+    position: static;
+    width: 100%;
+    max-width: 1200px;
+    text-align: left;
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+.section-title h2{
+    font-size: 24px;
+    font-weight: bold;
+}
+.related-slider-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.related-products-grid {
+    display: flex;
+    gap: 15px;
+    overflow: hidden;
+    width: 100%;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+}
+
+.related-products-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.related-products-grid section {
+    flex: 0 0 calc(25% - 12px); /* 一次顯示 4 個，第 5 個會藏在右邊 */
+    width: calc(25% - 12px); /* 確保手機版不會縮太小 */
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.related-products-grid section:hover {
+    transform: translateY(-5px);
+}
+.card-img-container {
+    background: #fff;
+    border-radius: 12px;
+    aspect-ratio: 1/1; /* 確保圖片區塊是正方形，不會變形 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 15px;
+}
+
+.card-img-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+/* 懸停出現的圖示按鈕*/
+.add-to-cart-overlay, .add-to-love-overlay {
+    position: absolute;
+    border: none;
+    cursor: pointer;
+    opacity: 0; /* 平常隱藏 */
+    transition: all 0.3s ease;
+    z-index: 20;
+}
+
+/* 購物車按鈕：在正中間 */
+.add-to-cart-overlay {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    background-color: #D36A28; /* 你的品牌橘色 */
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 愛心按鈕：在右上角 */
+.add-to-love-overlay {
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 滑鼠滑入卡片時顯示按鈕 */
+.related-products-grid section:hover .add-to-cart-overlay {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.related-products-grid section:hover .add-to-love-overlay {
+    opacity: 1;
+}
+
+/* 箭頭按鈕樣式 */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.1);
+    border: none;
+    font-size: 24px;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 5;
+    border-radius: 50%;
+}
+.prev-btn { left: 0; }
+.next-btn { right: 0; }
+
+
+/* --- 手機版適應：不夠寬時自動變成垂直排列 --- */
+@media (max-width: 992px) {
+    .nav-bar{
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .footer-col h3 {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 20px;
+    }
+
+    .product-container { 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .product-image,.product-info {
+        width: 100%; 
+        max-width: 500px;
+        padding-left: 0; /* 移除原本左右並排時的左邊距 */
+        margin-bottom: 30px;
+    }
+    .product-image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .header-main-row{
+        flex-direction: column;  /* 強制垂直排列 */
+        gap: 15px;
+    }
+
+    .product-image, .main-img-wrapper {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1; /* 維持正方形比例 */
+    }
+    .thumb {
+        width: 60px !important;
+        height: 60px !important;
+        flex: 0 0 60px;
+    }
+    .product-info{
+        padding-left: 10px;
+    }
+}

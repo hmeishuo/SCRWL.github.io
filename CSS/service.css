@@ -1,0 +1,460 @@
+/* --- 基礎設定 --- */
+
+* 
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html, body 
+{
+    height: 100%;
+    background-color: #F2EFE6;
+    color: #333;
+    font-family: 微軟正黑體, "Noto Sans TC", sans-serif;
+}
+main{
+    padding-top: 80px;
+}
+.content-container,.footer-inner{
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 統一超連結轉場效果 */
+
+a 
+{
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+
+/* --- 全域 Hover 變橘色 --- */
+
+a:hover, .header-right-icons i:hover, .social-box i:hover 
+{
+    color: #D36A28 ;
+}
+
+/* --- 回到頂部按鈕：去背與背景融合 --- */
+.top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    
+    /* 核心修改：移除背景顏色，改為透明 */
+    background: transparent; 
+    border: none;
+    
+    /* 設定按鈕大小 */
+    width: clamp(50px, 6vw, 80px); 
+    cursor: pointer;
+    
+    /* 讓按鈕在滾動時有一點浮動感 (可選) */
+    transition: transform 0.3s ease;
+}
+
+.top:hover {
+    transform: translateY(-10px); /* 滑鼠移上去會往上飄一點 */
+}
+
+.top a img {
+    width: 100%;
+    height: auto;
+    
+    /* 確保圖片本身沒有白底 */
+    display: block; 
+   
+}
+
+/* --- 聊聊 ---*/
+/* --- 左下角聊聊與彈出文字 --- */
+.chat-btn-fixed {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 1000;
+    width: 65px;
+    height: 65px;
+    background: transparent !important;
+}
+
+/* 提示文字樣式 */
+.chat-tooltip {
+    position: absolute;
+    left: 75px;        /* 放在按鈕的右側 */
+    top: 50%;          /* 垂直置中 */
+    transform: translateY(-50%);
+    
+    background-color: #fff;
+    color: #333;
+    padding: 8px 15px;
+    border: 2px solid #333; /* 街頭黑框感 */
+    border-radius: 5px;
+    font-weight: bold;
+    white-space: nowrap;    /* 強制文字不換行 */
+    
+    /* 平常隱藏且透明 */
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    
+    /* 裝飾性的小箭頭 */
+    pointer-events: none; 
+}
+
+/* 小箭頭 (指向左邊按鈕) */
+.chat-tooltip::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #333 transparent transparent;
+}
+
+/* --- 滑鼠碰到後的效果 --- */
+.chat-btn-fixed:hover .chat-tooltip {
+    visibility: visible;
+    opacity: 1;
+    left: 85px; /* 稍微往右彈出的動態感 */
+}
+
+.chat-btn-fixed:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* 圖片樣式維持去背 */
+.chat-btn-fixed img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+/* 手機版適應：手機通常沒有 Hover，建議直接隱藏提示或縮小 */
+@media (max-width: 768px) {
+    .chat-tooltip { display: none; }
+    .chat-btn-fixed { bottom: 20px; left: 20px; width: 50px; height: 50px; }
+}
+
+/* --- Footer 至底佈局 --- */
+
+.site-wrapper 
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+.content-container {
+    flex: 1 0 auto;
+    width: 100%;
+    margin: 0 auto;
+    
+}
+
+
+/* --- Header 部分 --- */
+
+.top-orange-bar {
+    background-color: #D36A28;
+    color: white;
+    text-align: center;
+    
+    /* 核心修正：強制 100% 寬度並黏在最上方 */
+    width: 100%;
+    position: fixed; /* 黏在螢幕最上方，滾動時也不會消失 */
+    top: 0;
+    left: 0;
+    z-index: 1000;   /* 確保它在所有元件的最上層 */
+    
+    padding: 0.8vw 0; 
+    font-size: clamp(12px, 1.2vw, 16px); 
+    letter-spacing: 0.2vw;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 35px;
+}
+
+body {
+    /* 關鍵：給 body 一個上邊距，數值需大於橘色條的高度 */
+    padding-top: 10px; 
+}
+
+
+.info-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.info-text {
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    white-space: nowrap;
+}
+
+.info-text.active {
+    opacity: 1;
+}
+
+
+
+.header-main-row{
+    position: fixed; 
+    top: 35px;
+    left: 0;
+    width: 100%;
+    height: 110px;
+    z-index: 1000;
+    background-color: #f2ede4; 
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 20px 10%; 
+}
+
+/*滾動後的樣式*/
+.header-main-row.scrolled {
+    background-color: rgba(242, 237, 228, 0.8) !important;
+    backdrop-filter: blur(8px);
+    padding: 10px 10%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.header-main-row.scrolled .big-logo-img {
+    height: 60px;
+}
+
+.header-main-row.scrolled .big-brand-name {
+    font-size: 30px;
+}
+
+.header-left, .header-right-icons, .logo-box { flex: 1; }
+
+.logo-box 
+{
+    display: flex;
+    align-items: center; /* 改為置中對齊，讓字與圖齊平 */
+    justify-content: center;
+    gap: 30px;
+}
+
+
+/* Logo 圖片與字體比例優化 */
+
+.big-logo-img 
+{
+    height: 100px; /* 稍微縮小一點圖片 */
+    width: auto;
+    mix-blend-mode: multiply;
+}
+
+
+.big-brand-name 
+{
+    font-size: 40px; /* 字體大小設為與圖片高度一致 (65px) */
+    font-weight: 900;
+    letter-spacing: 5px;
+    line-height: 1;
+    font-family: "Permanent Marker", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+.header-right-icons 
+{
+    display: flex;
+    justify-content: flex-end;
+    gap: 50px;
+    font-size: 24px;
+}
+
+/* 導覽列間距加開 */
+
+.nav-bar 
+{
+    padding: 0px 0 40px 0;
+    
+}
+
+.nav-bar ul 
+{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: clamp(20px, 8vw, 150px);
+}
+
+
+
+.nav-bar ul li a 
+{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/*卡片*/
+.service h1{
+    text-align: center;
+}
+.service h4{
+    color: red;
+}
+.card{
+    background-color: #fffff9db;
+    font-family: 微軟正黑體, "Noto Sans TC", sans-serif;
+    padding: 20px 5%;
+    margin: 20px 10px;
+    border-radius: 10px;
+    background-size: cover;
+    box-shadow: 0 4px 8px #838181;
+}
+.change{
+    padding-left: 20px;
+}
+.pri{
+    text-align: center;
+}
+.privacy{
+    color: #717171;
+}
+
+
+/* --- Footer 全域不跑版設定 --- */
+.main-footer {
+    width: 100%;
+    background-color: transparent; /* 或是你的背景色 */
+    border-top: 2px solid #333; /* 頂部加一條黑線增加層次感 */
+    padding-top: 50px;
+    margin-top: 100px; /* 與上方內容拉開距離 */
+}
+
+.footer-inner {
+    /* 核心：與你的 header/main 一樣維持 80% */
+    width: 80% !important;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    display: flex;
+    justify-content: space-between; /* 平均分配三個區塊 */
+    align-items: flex-start;
+    gap: 40px; /* 區塊之間的最小間距 */
+}
+
+.footer-col {
+    flex: 1; /* 讓三個區塊等寬 */
+    min-width: 200px; /* 防止區塊縮得太小 */
+}
+
+/* 標題樣式 */
+.footer-col h3 {
+    font-size: 1.2rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #333;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* 列表樣式：解決文字擠壓 */
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col li {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    line-height: 1.5;
+    white-space: nowrap; /* 關鍵：防止單行文字因寬度不足而斷行 */
+}
+
+.footer-col a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.footer-col a:hover {
+    color: #D36A28; /* 滑過時變橘色 */
+}
+
+/* 社交圖示 */
+.social-box {
+    display: flex;
+    gap: 15px;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+/* 版權宣告行 */
+.copyright-line {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 50px;
+    border-top: 1px solid #ddd;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* --- 手機版適應：不夠寬時自動變成垂直排列 --- */
+@media (max-width: 992px) {
+    .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .footer-col h3 {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 20px;
+    }
+
+    main{
+        padding-top: 190px;
+    }
+    .header-main-row{
+        flex-direction: column;  /* 強制垂直排列 */
+        gap: 15px;
+        height: 150px;
+    }
+    .header-main-row.scrolled {
+    /* 使用 RGBA 達成透明感，並移除白底 */
+        background-color: rgba(242, 239, 230) !important; 
+        backdrop-filter: blur(10px); /* 磨砂玻璃效果 */
+        padding: 10px 10%; /* 滑動時縮小高度，但維持 80% 內容位置 */
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        height: 120px !important;
+    }
+    .header-main-row.scrolled .big-logo-img {
+        height: 50px;
+    }
+    .header-main-row.scrolled .big-brand-name {
+        font-size: 25px;
+    }
+    .header-right-icons{
+        font-size: 15px;
+    }
+}
