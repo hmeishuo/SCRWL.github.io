@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCRWL - 商品</title>
+    <link rel="stylesheet" href="CSS/goods.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body class="site-wrapper">
+    <div class="content-container">
+        <header class="main-header">
+            <div class="top-orange-bar">
+                <div class="info-slider">
+                    <span class="info-text active">全館滿千免運🚛</span>
+                    <span class="info-text">新會員註冊即贈 100 元購物金💵</span>
+                    <span class="info-text">🔥滑板新品上市，限時 9 折🔥</span>
+                </div>
+            </div>
+            
+            <div class="header-main-row">
+                <div class="header-left"></div> 
+                
+                <div class="logo-box">
+                    <a href="index.html"><img src="image/front page/logo.jpg" alt="SCRWL Cat" class="big-logo-img"></a>
+                    <a href="index.html">
+                        <h1 class="big-brand-name">SCRWL</h1>
+                    </a>
+                </div>
+
+                <div class="header-right-icons">
+                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a href="member.html"><i class="fa-solid fa-user"></i></a>
+                    <a href="car.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="love.html"><i class="fa-solid fa-heart"></i></a>
+                </div>
+            </div>
+            <nav class="nav-bar">
+                <ul>
+                    <li><a href="index.html"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="new.html">新品上市NEW</a></li>
+                    <li><a href="skateboard.html">滑板</a></li>
+                    <li><a href="hat.html">帽子</a></li>
+                    <li><a href="t-shirt.html">衣服</a></li>
+                    <li><a href="about us.html">關於我們</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class="product-container">
+                <div class="product-image">
+                    <div class="main-img-wrapper">
+                        <a class="prev" onclick="plusSlides(-1)">❮</a>
+                        <img id="mainImg" src="" alt="商品圖片">
+                        <a class="next" onclick="plusSlides(1)">❯</a>
+                    </div>
+                    <div id="thumbContainer" class="thumb-list"></div>
+                </div>
+
+                <div class="product-info">
+                    <h1 id="pName">載入中...</h1><br>
+                    <p id="pDesc"></p><br>
+                    <h3 id="pPrice"></h3>
+                    
+                    <div class="actions">
+                        <div class="quantity-selector">
+                            <button class="btn-minus" id="minus">-</button>
+                            <input type="number" id="quantity" value="1" readonly>
+                            <button class="btn-plus" id="plus">+</button>
+                        </div>
+                        <div class="buy-group">
+                            <button>加入購物車</button>
+                            <button>立即購買</button>
+                        </div>
+                        <button class="btn-wishlist">加入喜愛</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="related-products">
+                <div class="section-title">
+                    <h2>▎相關產品</h2>
+                </div>
+                <div class="related-slider-container">
+                    <button class="slider-arrow prev" onclick="scrollRelated(-1)">❮</button>
+                    <div id="relatedGrid" class="related-products-grid">
+                        <section id="card-sample">
+                            <div class="card-img-container">
+                                <img class="rel-img" src="">
+                                <button class="add-to-cart-overlay"><i class="fa-solid fa-cart-shopping"></i></button>
+                                <button class="add-to-love-overlay"><i class="fa-solid fa-heart"></i></button>
+                            </div>
+                            <div class="card-info">
+                                <h4 class="rel-name">商品名稱</h4>
+                                <h5 class="rel-price">NT$0</h5>
+                            </div>
+                        </section>
+                    </div>
+                    <button class="slider-arrow next" onclick="scrollRelated(1)">❯</button>
+                </div>
+            </div>
+        </main>
+    
+
+    
+    <div class="chat-btn-fixed">
+        <a href="https://line.me/R/ti/p/@036xigoo" target="_blank">
+            <span class="chat-tooltip">24HR 線上客服 💬</span>
+            <img src="image/front page/chat.jpg" alt="聊聊">
+        </a>
+    </div>
+    
+    <div class="top">
+        <a href="#top"><img src="image/front page/top.jpg"></a>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h3>會員服務</h3>
+                <ul>
+                    <li><a href="qa.html">訂單Q&A</a></li>
+                    <li><a href="change.html">退換貨政策</a></li>
+                    <li><a href="privacy.html">隱私權政策</a></li>
+                    <li><a href="service.html">服務條款</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>聯絡方式</h3>
+                <ul>
+                    <li><a href="#">客服服務(電話)</a></li>
+                    <li><a href="#">24HR線上服務</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>關於我們</h3>
+                <div class="social-box">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://line.me/R/ti/p/@036xigoo"><i class="fa-brands fa-line"></i></a>
+                </div>
+                <div class="address-box">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>320桃園市中壢區中北路200號中原大學資訊管理學系</span>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-line">
+            copyright@ 2025 SCRWL TEAM
+        </div>
+    </footer>
+    <script src="JS/goods.js"></script>
+</body>
+</html>

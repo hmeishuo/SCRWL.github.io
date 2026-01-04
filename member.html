@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCRWL - 滑進街頭</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body class="site-wrapper">
+
+    <div class="content-container">
+        <header class="main-header">
+            <div class="top-orange-bar">
+                <div class="info-slider">
+                    <span class="info-text active">全館滿千免運🚛</span>
+                    <span class="info-text">新會員註冊即贈 100 元購物金💵</span>
+                    <span class="info-text">🔥滑板新品上市，限時 9 折🔥</span>
+                </div>
+            </div>
+            
+            <div class="header-main-row">
+                <div class="header-left"></div> 
+                
+                <div class="logo-box">
+                    <a href="index.html"><img src="image/front page/logo.jpg" alt="SCRWL Cat" class="big-logo-img"></a>
+                    <a href="index.html">
+                        <h1 class="big-brand-name">SCRWL</h1>
+                    </a>
+                </div>
+
+                <div class="header-right-icons">
+                    <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+                    <a href="member.html"><i class="fa-solid fa-user"></i></a>
+                    <a href="car.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <a href="love.html"><i class="fa-solid fa-heart"></i></a>
+                </div>
+            </div>
+
+            
+        </header>
+
+        <main class="content-container">
+            <section class="member-section">
+                <h2 class="cart-title">| MEMBER 會員中心 </h2>
+        
+                <div class="member-container">
+                    <div id="login-box" class="info-box-street member-box">
+                        <div class="info-box-header">LOGIN 會員登入</div>
+                        <div class="info-box-body">
+                            <form id="login-form">
+                                <div class="form-group-street">
+                                    <label>信 箱：</label>
+                                    <input type="email" placeholder="example@mail.com" class="input-field" required>
+                                </div>
+                                <div class="form-group-street">
+                                    <label>密 碼：</label>
+                                    <input type="password" placeholder="請輸入密碼" class="input-field" required>
+                                </div>
+                    
+                                <div class="form-options">
+                                    <label class="remember-me">
+                                        <input type="checkbox" name="remember">
+                                        <span class="custom-checkbox"></span>
+                                        記住密碼
+                                    </label>
+                                    <a href="javascript:void(0)" class="forgot-password" onclick="handleForgotPwd()">忘記密碼？</a>
+                                </div>
+                    
+                                <button type="submit" class="btn-street checkout-btn full-btn">登入 LOGIN</button>
+                            </form>
+                            <div class="switch-link">
+                                還沒有帳號？ <a href="javascript:void(0)" onclick="toggleMember()">點我註冊</a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div id="register-box" class="info-box-street member-box" style="display: none;">
+                        <div class="info-box-header">REGISTER 帳號註冊</div>
+                        <div class="info-box-body">
+                            <form id="register-form">
+                                <div class="form-group-street">
+                                    <label>姓 名：</label>
+                                    <input type="text" placeholder="您的真實姓名" class="input-field" required>
+                                </div>
+                                <div class="form-group-street">
+                                    <label>信 箱：</label>
+                                    <input type="email" placeholder="將作為登入帳號" class="input-field" required>
+                                </div>
+                                <div class="form-group-street">
+                                    <label>密 碼：</label>
+                                    <input type="password" placeholder="請輸入密碼" class="input-field" required>
+                                </div>
+                                <button type="submit" class="btn-street checkout-btn full-btn">立即註冊 JOIN</button>
+                            </form>
+                            <div class="switch-link">
+                                已經有帳號？ <a href="javascript:void(0)" onclick="toggleMember()">回登入頁</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="chat-btn-fixed">
+        <a href="https://line.me/R/ti/p/@036xigoo" target="_blank">
+            <span class="chat-tooltip">24HR 線上客服 💬</span>
+            <img src="image/front page/chat.jpg" alt="聊聊">
+        </a>
+    </div>
+
+    <div class="top">
+        <a href="#top"><img src="image/front page/top.jpg"></a>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h3>會員服務</h3>
+                <ul>
+                    <li><a href="qa.html">訂單Q&A</a></li>
+                    <li><a href="change.html">退換貨政策</a></li>
+                    <li><a href="privacy.html">隱私權政策</a></li>
+                    <li><a href="service.html">服務條款</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>聯絡方式</h3>
+                <ul>
+                    <li>客服服務(電話)0800-123-456</li>
+                    <li>24HR線上服務</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>關於我們</h3>
+                <div class="social-box">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://line.me/R/ti/p/@036xigoo"><i class="fa-brands fa-line"></i></a>
+                </div>
+                <div class="address-box">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>320桃園市中壢區中北路200號中原大學資訊管理學系</span>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-line">
+            copyright@ 2025 SCRWL TEAM
+        </div>
+    </footer>
+
+    <script src="JS/script.js"></script>
+</body>
+</html>
